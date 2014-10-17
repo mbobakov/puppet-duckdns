@@ -1,0 +1,10 @@
+name          'revglor-duckdns'
+version       '1.0.0'
+source        'https://github.com/mbobakov/puppet-duckdns'
+author        'Mstislav Bobakov'
+license       'Apache 2.0'
+summary       'client for DuckDNS (https://duckdns.org/)'
+description   'client for DuckDNS (https://duckdns.org/)'
+project_page  'https://github.com/mbobakov/puppet-duckdns'
+
+dependency 'puppetlabs/stdlib'
