@@ -1,60 +1,46 @@
-####Table of Contents
-
-1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with duckdns](#setup)
-    * [What duckdns affects](#what-duckdns-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with duckdns](#beginning-with-duckdns)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
-
-##Overview
-
-A one-maybe-two sentence summary of what the module does/what problem it solves. This is your 30 second elevator pitch for your module. Consider including OS/Puppet version it works with.       
-
 ##Module Description
-
-If applicable, this section should have a brief description of the technology the module integrates with and what that integration enables. This section should answer the questions: "What does this module *do*?" and "Why would I use it?"
-
-If your module has a range of functionality (installation, configuration, management, etc.) this is the time to mention it.
+Client for DuckDNS dynamic dns service (https://duckdns.org/). Create cron job for update ip's and put logs about update process into systemjournal. Now only UNIX-like OS is supported. Pull-requests are welcome. ;)  
 
 ##Setup
+puppet module install revglor-duckdns
 
-###What duckdns affects
+##Params
+ [*ensure*]
+   Ensure for this client. Mandatory. String. Default: present
+ [*token*]
+   Usertoken for DuckDNS account. Mandatory. String. Default: empty
+ [*ip*]
+   Static ip for each domain in domains-array. If empty, use current public ip. Optional. String. Default: empty
+ [*update_minutes*]
+   How often update ip in minutes. Uses for create cron job. Mandatory. Int. Default: 5
+ [*updater*]
+   Location of the updater-script. Default: /opt/duckdns.sh
+ [*domains*]
+   Domains for update. Mandatory. Array. Default: empty
 
-* A list of files, packages, services, or operations that the module will alter, impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form. 
+##Sample Usage
+  ###Puppet class
+     class { 'duckdns':
+           ensure         => 'present',
+           token          => 'token_fer43sdgf245tswdfg34sdfgsdf',
+           ip             => '8.8.8.8',
+           update_minutes => 15,
+           updater        => '/opt/duckdns.sh',
+           domains        => ['test', 'tst.example'],
+  }
 
-###Setup Requirements **OPTIONAL**
+  ####With Hiera 
+  'include duckdns' in manifest and 
+    add Hiera params:
+     duckdns::ensure:  'present'
+     duckdns::token:  'token_fer43sdgf245tswdfg34sdfgsdf'
+     duckdns::ip: '8.8.8.8' 
+     duckdns::update_minutes:  15
+     duckdns::updater:  '/opt/duckdns.sh'
+     duckdns::domains:  ['test', 'tst.example']
 
-If your module requires anything extra before setting up (pluginsync enabled, etc.), mention it here. 
-
-###Beginning with duckdns
-
-The very basic steps needed for a user to get the module up and running. 
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you may wish to include an additional section here: Upgrading (For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
-
-##Usage
-
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
-
-##Reference
-
-Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
-
-##Limitations
-
-This is where you list OS compatibility, version compatibility, etc.
+  About params see (#params)
 
 ##Development
 
 Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
-
-##Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
