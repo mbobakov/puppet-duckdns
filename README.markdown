@@ -20,14 +20,16 @@ puppet module install revglor-duckdns
 
 ##Sample Usage
 ###Puppet class
-``class { 'duckdns':
-    ensure         => 'present',
-    token          => 'token_fer43sdgf245tswdfg34sdfgsdf',
-    ip             => '8.8.8.8',
-    update_minutes => 15,
-    updater        => '/opt/duckdns.sh',
-    domains        => ['test', 'tst.example'],
-   }``
+   ```puppet
+    class { 'duckdns':
+      ensure         => 'present',
+      token          => 'token_fer43sdgf245tswdfg34sdfgsdf',
+      ip             => '8.8.8.8',
+      update_minutes => 15,
+      updater        => '/opt/duckdns.sh',
+      domains        => ['test', 'tst.example'],
+    } 
+   ```
 ####With Hiera 
   
   ``include duckdns`` in manifest and 
@@ -41,7 +43,7 @@ puppet module install revglor-duckdns
     duckdns::updater: '/opt/duckdns.sh'
     duckdns::domains: ['test', 'tst.example']``
   
-  About params see (#params)
+>### About params see [Params](# Params)
 
 ##Development
 
