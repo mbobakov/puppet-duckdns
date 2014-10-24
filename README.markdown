@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/mbobakov/puppet-duckdns.png)](https://travis-ci.org/mbobakov/puppet-duckdns)
 ##Module Description
 Client for DuckDNS dynamic dns service (https://duckdns.org/). Create cron job for update ip's and put logs about update process into systemjournal. Now only UNIX-like OS is supported. Pull-requests are welcome. ;)  
 
